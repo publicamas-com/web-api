@@ -1,6 +1,7 @@
 export class UserModel {
     id: string;
     email: string;
+    roleId: string;
     hash: string;
     firstName: string;
     lastName: string;
@@ -10,6 +11,7 @@ export class UserModel {
     emailVerifiedAt: Date;
     muteSounds: boolean;
     isLocked: boolean;
+    isLockedTransactions: boolean;
     badAttempts: number;
     lastLogin: Date;
     deletedAt: Date;

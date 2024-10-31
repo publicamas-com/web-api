@@ -1,7 +1,9 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, Req } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, Req, UseInterceptors } from '@nestjs/common';
 import SignUpCommand from '../../../application/commands/users/signUp.command';
 import SignUpResponse from '../../responses/users/signUp.response';
 import SignUpUseCase from '../../../application/usecases/users/signUp.usecase';
+import { TransactionInterceptor } from '../../interceptors/transaction.interceptor';
+import { CustomExceptionFilter } from '../../interceptors/customException.interceptor';
 
 
 
@@ -13,7 +15,8 @@ export default class UserController {
   ) {
   }
 
-  @Post('/signup')
+  @Post('/sign-up')
+  @UseInterceptors(TransactionInterceptor, CustomExceptionFilter)
   @HttpCode(HttpStatus.CREATED)
   public async createApplication(
     @Body() signUpCommand: SignUpCommand,

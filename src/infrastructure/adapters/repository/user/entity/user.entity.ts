@@ -38,6 +38,12 @@ export class UserEntity {
   @Column({ name: 'is_locked', type: 'boolean', default: false })
   isLocked: boolean;
 
+  @Column({ name: 'is_locked_transactions', type: 'boolean', default: false })
+  isLockedTransactions: boolean;
+
+  @Column({ name: 'role_id', type: 'varchar'})
+  roleId: string;
+
   @Column({ name: 'bad_attempts', type: 'int', default: 0 })
   badAttempts: number;
 

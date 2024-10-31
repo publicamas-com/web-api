@@ -16,7 +16,7 @@ import { AuthenticationMiddleware } from './middleware/authentication.middleware
 export class InfrastructureModule {
   configure(consumer: MiddlewareConsumer): MiddlewareConsumer | void {
     consumer.apply(AuthenticationMiddleware).forRoutes(
-      { method: RequestMethod.POST, path: '/api/v1/users' },
+      { method: RequestMethod.POST, path: '/api/v1/users/me' },
     );
   }
 }
