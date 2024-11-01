@@ -14,17 +14,31 @@ export default class UserRepositoryPostgres extends BaseRepositoryPostgres imple
     super(dataSource, req);
   }
 
-  async createUser(userModel: UserModel): Promise<Optional<UserModel>> {
-    const userEntity = UserMapper.fromModelToEntity(userModel);
-    let result = await this.getRepository(UserEntity).save(userEntity);
-    return UserMapper.fromEntityToModel(result);
-  }
-
   async findUserByEmail(email: string): Promise<Optional<UserModel>> {
     const userEntity = await this.getRepository(UserEntity).findOneBy({ email });
     if (!userEntity) {
       return Optional.empty();
     }
     return UserMapper.fromEntityToModel(userEntity);
+  }
+
+  async findUserByValidationCode(code: string): Promise<Optional<UserModel>> {
+    const userEntity = await this.getRepository(UserEntity).findOneBy({ verificationCode: code });
+    if (!userEntity) {
+      return Optional.empty();
+    }
+    return UserMapper.fromEntityToModel(userEntity);
+  }
+
+  async createUser(userModel: UserModel): Promise<Optional<UserModel>> {
+    const userEntity = UserMapper.fromModelToEntity(userModel);
+    let result = await this.getRepository(UserEntity).save(userEntity);
+    return UserMapper.fromEntityToModel(result);
+  }
+
+  async updateUser(user: UserModel): Promise<Optional<UserModel>> {
+    const userEntity = UserMapper.fromModelToEntity(user);
+    let result = await this.getRepository(UserEntity).save(userEntity);
+    return UserMapper.fromEntityToModel(result);
   }
 }

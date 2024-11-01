@@ -25,7 +25,7 @@ export default class NotificationService {
       console.log(`Template path: ${templatePath}`);
       const templateSource = fs.readFileSync(templatePath, 'utf-8');
       const compiledTemplate = handlebars.compile(templateSource);
-      const emailHtml = compiledTemplate({ firstName: userM.firstName, lastName: userM.lastName });
+      const emailHtml = compiledTemplate({ firstName: userM.firstName, lastName: userM.lastName, verificationCode: userM.verificationCode });
       await this.emailSender.sendEmail(userM.email, emailHtml, 'Bienvenido a Publicamas');
 
     } catch (error) {

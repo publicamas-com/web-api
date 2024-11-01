@@ -41,6 +41,9 @@ export class UserEntity {
   @Column({ name: 'is_locked_transactions', type: 'boolean', default: false })
   isLockedTransactions: boolean;
 
+  @Column({name:"verification_code", type:"varchar", length:255, nullable:true})
+  verificationCode: string;
+
   @Column({ name: 'role_id', type: 'varchar'})
   roleId: string;
 

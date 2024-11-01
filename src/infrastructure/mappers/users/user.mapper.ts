@@ -22,6 +22,7 @@ export default class UserMapper {
     userM.isLocked = userEntity.isLocked;
     userM.badAttempts = userEntity.badAttempts;
     userM.lastLogin = userEntity.lastLogin;
+    userM.verificationCode = userEntity.verificationCode;
     userM.deletedAt = userEntity.deletedAt;
     userM.createdAt = userEntity.createdAt;
     userM.updatedAt = userEntity.updatedAt;
@@ -32,6 +33,7 @@ export default class UserMapper {
     let userE = new UserEntity();
     userE.id = userModel.id;
     userE.roleId = userModel.roleId;
+    userE.verificationCode = userModel.verificationCode;
     userE.isLockedTransactions = userModel.isLockedTransactions;
     userE.firstName = userModel.firstName;
     userE.lastName = userModel.lastName;

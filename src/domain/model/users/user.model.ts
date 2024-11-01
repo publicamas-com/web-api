@@ -12,6 +12,7 @@ export class UserModel {
     muteSounds: boolean;
     isLocked: boolean;
     isLockedTransactions: boolean;
+    verificationCode: string;
     badAttempts: number;
     lastLogin: Date;
     deletedAt: Date;

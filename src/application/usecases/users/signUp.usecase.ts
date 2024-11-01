@@ -10,6 +10,7 @@ import { CustomHttpException } from '../../../domain/exceptions/customHttp.excep
 import { RoleId } from '../../../domain/model/users/constants/roleId';
 import { PublicamasException } from '../../../domain/exceptions/publicamas.exception';
 import { HttpStatusCodesConstants } from '../../../domain/constants/httpStatusCodes.constants';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class SignUpUseCase {
   constructor(
@@ -29,6 +30,7 @@ export default class SignUpUseCase {
       throw new UserExistsException(userModel.email);
     }
     userModel.roleId = RoleId.USER;
+    userModel.verificationCode = uuidv4();
     const createdUser = await this.userRepository.createUser(userModel);
     try{
       await this.notificationService.sendSignUpEmail(createdUser.orElseThrow(() => new CustomHttpException()));
