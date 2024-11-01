@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
-import { Transporter } from 'nodemailer';
 
 @Injectable()
 export default class EmailSenderService {
@@ -19,13 +18,13 @@ export default class EmailSenderService {
     });
   }
 
-  public async sendEmail(email: string, content: string): Promise<void> {
+  public async sendEmail(email: string, content: string, subject:string): Promise<void> {
     console.log(`Sending email to ${email}`);
     await this.transporter.sendMail({
       from: this.configService.get('SMTP_USER'),
       to: email,
-      subject: 'Welcome to our platform',
-      text: content,
+      subject,
+      html: content,
     });
   }
 

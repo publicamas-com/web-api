@@ -37,7 +37,6 @@ export default class SignUpUseCase {
       console.error("Error creating the user (Sending the notification)", error);
       throw new PublicamasException("Error creating the user (Sending the notification)", HttpStatusCodesConstants.INTERNAL_SERVER_ERROR )
     }
-
     return createdUser;
   };
 }
