@@ -12,6 +12,12 @@ import UserActivityRepositoryPostgres
 import { UserActivityEntity } from '../infrastructure/adapters/repository/user/entity/userActivity.entity';
 import NotificationService from './services/notifications/notification.service';
 import EmailSenderService from './services/notifications/emailSender.service';
+import CategoryRepositoryPostgres from '../infrastructure/adapters/repository/category/category.repository.postgres';
+import { CATEGORIES_USE_CASES } from './usecases/categories';
+import CategoryFactory from './factories/category/category.factory';
+import { CategoryEntity } from '../infrastructure/adapters/repository/category/entity/category.entity';
+import { AddressEntity } from '../infrastructure/adapters/repository/address/entity/address.entity';
+import { RegionEntity } from '../infrastructure/adapters/repository/region/region.entity';
 
 @Module({
   imports: [DomainModule,
@@ -34,19 +40,27 @@ import EmailSenderService from './services/notifications/emailSender.service';
     TypeOrmModule.forFeature([
       UserEntity,
       UserActivityEntity,
+      CategoryEntity,
+      AddressEntity,
+      RegionEntity
     ]),
   ],
   providers: [
     UserFactory,
+    CategoryFactory,
     EmailSenderService,
     NotificationService,
     { provide: 'UserRepository', useClass: UserRepositoryPostgres, scope: Scope.REQUEST },
     { provide: 'UserActivityRepository', useClass: UserActivityRepositoryPostgres, scope: Scope.REQUEST },
+    { provide: 'CategoryRepository', useClass: CategoryRepositoryPostgres, scope: Scope.REQUEST },
     ...USERS_USE_CASES,
+    ...CATEGORIES_USE_CASES,
   ],
   exports: [
     UserFactory,
+    CategoryFactory,
     ...USERS_USE_CASES,
+    ...CATEGORIES_USE_CASES,
   ],
 })
 export class ApplicationModule {

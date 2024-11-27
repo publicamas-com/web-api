@@ -24,7 +24,7 @@ export class AppModule {
   constructor(private readonly configService: ConfigService) {
     const logger = new Logger(AppModule.name);
 
-    AppModule.port = configService.get(Configuration.PORT);
+    AppModule.port = this.configService.get(Configuration.PORT);
 
     logger.log(
       `Configure on ENV: ${configService.get(Configuration.NODE_ENV)}`,
