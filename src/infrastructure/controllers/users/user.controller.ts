@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, Req, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Req, UseInterceptors } from '@nestjs/common';
 import SignUpCommand from '../../../application/commands/users/signUp.command';
 import SignUpResponse from '../../responses/users/signUp.response';
 import SignUpUseCase from '../../../application/usecases/users/signUp.usecase';
@@ -7,8 +7,11 @@ import { CustomExceptionFilter } from '../../interceptors/customException.interc
 import { PublicamasException } from '../../../domain/exceptions/publicamas.exception';
 import { HttpStatusCodesConstants } from '../../../domain/constants/httpStatusCodes.constants';
 import ValidateAccountUseCase from '../../../application/usecases/users/validateAccount.usecase';
-import { SignInResponse } from '../../../application/responses/user/signIn.response';
+import { GetUserResponse, SignInResponse } from '../../../application/responses/user';
 import SignInUseCase from '../../../application/usecases/users/signIn.usecase';
+import SignInCommand from '../../../application/commands/users/signIn.command';
+import { UserModel } from '../../../domain/model';
+import GetUserUseCase from '../../../application/usecases/users/getUser.usecase';
 
 
 @Controller('/api/v1/users')
@@ -18,6 +21,7 @@ export default class UserController {
     private readonly signUpUseCase: SignUpUseCase,
     private readonly validateAccountUseCase: ValidateAccountUseCase,
     private readonly signInUseCase: SignInUseCase,
+    private readonly getUserUseCase: GetUserUseCase,
   ) {
   }
 
@@ -53,8 +57,17 @@ export default class UserController {
   @UseInterceptors(TransactionInterceptor, CustomExceptionFilter)
   @HttpCode(HttpStatus.OK)
   public async signIn(
-    @Body() signInCommand: SignUpCommand,
+    @Body() signInCommand: SignInCommand,
   ): Promise<SignInResponse> {
     return await this.signInUseCase.handler(signInCommand);
+  }
+
+  @Get('/me')
+  @UseInterceptors(TransactionInterceptor, CustomExceptionFilter)
+  @HttpCode(HttpStatus.OK)
+  public async getMe(
+    @Req() req: any,
+  ): Promise<GetUserResponse> {
+    return await this.getUserUseCase.handler(req.user.userId);
   }
 }

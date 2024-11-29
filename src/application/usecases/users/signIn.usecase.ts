@@ -1,5 +1,4 @@
 import { Inject } from '@nestjs/common';
-import { Optional } from 'typescript-optional';
 import { UserModel } from '../../../domain/model';
 import { UserRepositoryInterface } from '../../../domain/ports/repository/user/user.repository.interface';
 import { PublicamasException } from '../../../domain/exceptions/publicamas.exception';

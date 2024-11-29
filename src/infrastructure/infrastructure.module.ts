@@ -17,7 +17,7 @@ import { CategoryController } from './controllers/category/category.controller';
 export class InfrastructureModule {
   configure(consumer: MiddlewareConsumer): MiddlewareConsumer | void {
     consumer.apply(AuthenticationMiddleware).forRoutes(
-      { method: RequestMethod.POST, path: '/api/v1/users/me' },
+      { method: RequestMethod.GET, path: '/api/v1/users/me' },
     );
   }
 }

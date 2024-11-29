@@ -9,4 +9,6 @@ export interface UserRepositoryInterface {
   findUserByValidationCode(code: string): Promise<Optional<UserModel>>;
 
   updateUser(user: UserModel): Promise<Optional<UserModel>>;
+
+  findUserById(userId: string): Promise<Optional<UserModel>>;
 }
