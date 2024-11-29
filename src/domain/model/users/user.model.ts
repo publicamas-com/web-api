@@ -1,10 +1,19 @@
-export class UserModel{
+export class UserModel {
     id: string;
-    name: string;
     email: string;
-    password: string;
-    role: string;
+    roleId: string;
+    hash: string;
+    firstName: string;
+    lastName: string;
     createdAt: Date;
     updatedAt: Date;
+    photoUrl: string;
+    emailVerifiedAt: Date;
+    muteSounds: boolean;
+    isLocked: boolean;
+    isLockedTransactions: boolean;
+    verificationCode: string;
+    badAttempts: number;
+    lastLogin: Date;
     deletedAt: Date;
 }

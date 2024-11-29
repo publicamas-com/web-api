@@ -7,33 +7,34 @@ import { configVar } from './config/config-var';
 import { Configuration } from './config/env.enum';
 
 @Module({
-    imports: [
-        ConfigModule.forRoot({
-            envFilePath: `./environments/${process.env.NODE_ENV}.env`,
-            load: [configVar],
-        }),
-        DomainModule,
-        ApplicationModule,
-        InfrastructureModule,
-    ],
-    providers: [ConfigService],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: `./environments/${process.env.NODE_ENV}.env`,
+      load: [configVar],
+    }),
+    DomainModule,
+    ApplicationModule,
+    InfrastructureModule,
+  ],
+  providers: [ConfigService],
 })
 export class AppModule {
-    static port: number | string;
-    constructor(private readonly configService: ConfigService) {
-        const logger = new Logger(AppModule.name);
+  static port: number | string;
 
-        AppModule.port = configService.get(Configuration.PORT);
+  constructor(private readonly configService: ConfigService) {
+    const logger = new Logger(AppModule.name);
 
-        logger.log(
-            `Configure on ENV: ${configService.get(Configuration.NODE_ENV)}`,
-        );
+    AppModule.port = this.configService.get(Configuration.PORT);
 
-        logger.verbose(`CONFIG_VAR: => ${JSON.stringify(configVar())}`);
+    logger.log(
+      `Configure on ENV: ${configService.get(Configuration.NODE_ENV)}`,
+    );
 
-        logger.log(
-            `Configure NODE PORT on ${configService.get(Configuration.PORT)}`,
-            AppModule.name,
-        );
-    }
+    logger.verbose(`CONFIG_VAR: => ${JSON.stringify(configVar())}`);
+
+    logger.log(
+      `Configure NODE PORT on ${configService.get(Configuration.PORT)}`,
+      AppModule.name,
+    );
+  }
 }
