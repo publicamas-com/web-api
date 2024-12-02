@@ -1,9 +1,13 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index } from 'typeorm';
+import { PublicamasEntity } from '../../publicamas.entity';
 
 @Entity('Categories')
-export class CategoryEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+export class CategoryEntity extends PublicamasEntity {
+  constructor() {
+    super();
+  }
+
+
   @Column({ name: 'name', type: 'varchar', length: 255 })
   name: string;
   @Index({ unique: true })
@@ -18,10 +22,6 @@ export class CategoryEntity {
   isActive: boolean;
   @Column({ name: 'is_deleted', type: 'boolean', nullable:false, default:false })
   isDeleted: boolean;
-  @Column({ name: 'created_at', type: 'timestamptz' })
-  createdAt: Date;
-  @Column({ name: 'updated_at', type: 'timestamptz' })
-  updatedAt: Date;
   @Column({ name: 'deleted_at', type: 'timestamptz', nullable: true })
   deletedAt: Date;
 }

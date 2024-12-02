@@ -18,6 +18,25 @@ import CategoryFactory from './factories/category/category.factory';
 import { CategoryEntity } from '../infrastructure/adapters/repository/category/entity/category.entity';
 import { AddressEntity } from '../infrastructure/adapters/repository/address/entity/address.entity';
 import { RegionEntity } from '../infrastructure/adapters/repository/region/region.entity';
+import { CategoryBrandEntity } from '../infrastructure/adapters/repository/category/entity/categoryBrand.entity';
+import { CategoryFieldEntity } from '../infrastructure/adapters/repository/category/entity/categoryField.entity';
+import { PublicationEntity } from '../infrastructure/adapters/repository/publication/entity/publication.entity';
+import {
+  PublicationAssetEntity,
+} from '../infrastructure/adapters/repository/publication/entity/publicationAsset.entity';
+import {
+  PublicationFieldValuesEntity,
+} from '../infrastructure/adapters/repository/publication/entity/publicationFieldValues.entity';
+import { BrandEntity } from '../infrastructure/adapters/repository/brand/entity/brand.entity';
+import {
+  PublicationAnswerEntity,
+} from '../infrastructure/adapters/repository/publication/entity/publicationAnswer.entity';
+import {
+  PublicationOpinionEntity
+} from '../infrastructure/adapters/repository/publication/entity/publicationOpinion.entity';
+import {
+  PublicationQuestionEntity
+} from '../infrastructure/adapters/repository/publication/entity/publicationQuestion.entity';
 
 @Module({
   imports: [DomainModule,
@@ -40,9 +59,18 @@ import { RegionEntity } from '../infrastructure/adapters/repository/region/regio
     TypeOrmModule.forFeature([
       UserEntity,
       UserActivityEntity,
-      CategoryEntity,
       AddressEntity,
-      RegionEntity
+      BrandEntity,
+      CategoryEntity,
+      CategoryBrandEntity,
+      CategoryFieldEntity,
+      PublicationEntity,
+      PublicationAssetEntity,
+      PublicationFieldValuesEntity,
+      PublicationQuestionEntity,
+      PublicationOpinionEntity,
+      PublicationAnswerEntity,
+      RegionEntity,
     ]),
   ],
   providers: [
