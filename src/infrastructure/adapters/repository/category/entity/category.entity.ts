@@ -1,4 +1,4 @@
-import { Column, Entity, Index } from 'typeorm';
+import { Column, DeleteDateColumn, Entity, Index } from 'typeorm';
 import { PublicamasEntity } from '../../publicamas.entity';
 
 @Entity('Categories')
@@ -22,6 +22,6 @@ export class CategoryEntity extends PublicamasEntity {
   isActive: boolean;
   @Column({ name: 'is_deleted', type: 'boolean', nullable:false, default:false })
   isDeleted: boolean;
-  @Column({ name: 'deleted_at', type: 'timestamptz', nullable: true })
+  @DeleteDateColumn({ name: 'deleted_at', type: 'timestamptz', nullable: true })
   deletedAt: Date;
 }
